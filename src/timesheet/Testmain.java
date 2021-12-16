@@ -80,15 +80,38 @@ public class Testmain {
 			} while (flag == 1);
 
 			User user = new User(firstname, lastname, username, password);
-			userdao.insertuser(user);
+			userdao.insertUser(user);
 		
-//		case 2:
-//			userdao=new UserDAO();
-//			System.out.println("User Login");
-//			System.out.println("Enter registered User Name:");
-//			System.out.println("Enter valid password:");
-//			User validuser=userdao.validateuser(username, password);
-//			break;
+		case 2:
+			userdao=new UserDAO();
+			System.out.println("User Login");
+			do {
+				System.out.println("Enter registered User Name:");
+				username=sc.nextLine();
+				if (username.matches("[a-z0-9.]+[@][a-z]+[.][]a-z]+")) {
+					flag = 0;
+					break;
+				} else {
+					System.out.println("invalid username");
+					flag = 1;
+				}
+			} while (flag == 1);
+			do {
+				System.out.println("Enter valid Password:");
+				password = sc.nextLine();
+				if (password.matches("[A-Z]+[a-z]+[0-9]+[@#.]+{8,10}")) {
+					flag = 0;
+					break;
+				} else {
+					System.out.println("invalid password");
+					flag = 1;
+				}
+			} while (flag == 1);
+			User validuser=userdao.validateUser(username, password);
+			if(validuser!=null) {
+				System.out.println("Welcome\t"+validuser.getFirstname());
+			}
+			break;
 		}
 	}
 

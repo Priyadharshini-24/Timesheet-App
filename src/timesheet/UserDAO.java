@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-	public void insertuser(User user)
+	public void insertUser(User user)
 	{
 		String insertquery="INSERT INTO USER_lOGIN(FIRST_NAME,LAST_NAME,USER_NAME,PASSWORD)VALUES(?,?,?,?)";
 		Connectionutil conutil=new Connectionutil();
@@ -32,9 +32,10 @@ public class UserDAO {
 			System.out.println("values not inserted");
 		}
 	}
-	public User validateuser(String username,String password)
+	
+	public User validateUser(String username,String password)
 	{
-		String validatequery="select * from USER_LOGIN where user_name="+username;
+		String validatequery="select * from USER_LOGIN where user_name='"+username+"'and password='"+password+"'";
 		Connection con=Connectionutil.getDbConnection();
 		User user=null;
 		try {
@@ -42,8 +43,7 @@ public class UserDAO {
 			ResultSet rs=st.executeQuery(validatequery);
 			if(rs.next())
 			{
-				System.out.println(rs.getString(4)+" "+rs.getString(5));
-				user=new User(rs.getString(4),username,rs.getString(5),password);
+				user=new User(rs.getString(2),rs.getString(3), username,password );
 			}
 			
 		} catch (SQLException e) {
