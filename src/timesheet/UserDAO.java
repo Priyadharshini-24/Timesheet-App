@@ -1,0 +1,85 @@
+package timesheet;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserDAO {
+	public void insertuser(User user)
+	{
+		String insertquery="INSERT INTO USER_lOGIN(FIRST_NAME,LAST_NAME,USER_NAME,PASSWORD)VALUES(?,?,?,?)";
+		Connectionutil conutil=new Connectionutil();
+		Connection con=conutil.getDbConnection();
+		PreparedStatement pstmt=null;
+		try
+		{
+			pstmt=con.prepareStatement(insertquery);
+			pstmt.setString(1, user.getFirstname());
+			pstmt.setString(2, user.getLastname());
+			pstmt.setString(3, user.getUsername());
+			pstmt.setString(4, user.getPassword());
+			pstmt.executeUpdate();
+			System.out.println("value insert successfully");
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			System.out.println("values not inserted");
+		}
+	}
+	public User validateuser(String username,String password)
+	{
+		String validatequery="select * from USER_LOGIN where user_name="+username;
+		Connection con=Connectionutil.getDbConnection();
+		User user=null;
+		try {
+			Statement st=con.createStatement();
+			ResultSet rs=st.executeQuery(validatequery);
+			if(rs.next())
+			{
+				System.out.println(rs.getString(4)+" "+rs.getString(5));
+				user=new User(rs.getString(4),username,rs.getString(5),password);
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			System.out.println("Statement error");
+		}
+		return user;
+		
+	}
+
+	public List<User> showalluser()
+	{
+		List<User> userlist=new ArrayList<User>();
+		String selectquery="select * from USER_LOGIN";
+		Connectionutil conutil=new Connectionutil();
+		Connection con=conutil.getDbConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try
+		{
+			pstmt=con.prepareStatement(selectquery);	
+			rs=pstmt.executeQuery();
+		while(rs.next())
+		{
+			User user=new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+			userlist.add(user);
+		}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			System.out.println("values not selected");
+		}
+		
+		return userlist;
+		
+	}
+}
