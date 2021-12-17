@@ -3,9 +3,9 @@ package com.timesheet.module;
 public class Timesheet {
 	private int userid;
 	private int taskid;
-	private int spend_time;
+	private int spendtime;
 	private String comments;
-	private String timesheet_for_date;
+	private String timesheetfordate;
 	
 	public int getUserid() {
 		return userid;
@@ -20,10 +20,10 @@ public class Timesheet {
 		this.taskid = taskid;
 	}
 	public int getSpend_time() {
-		return spend_time;
+		return spendtime;
 	}
 	public void setSpend_time(int spend_time) {
-		this.spend_time = spend_time;
+		this.spendtime = spend_time;
 	}
 	public String getComments() {
 		return comments;
@@ -32,10 +32,10 @@ public class Timesheet {
 		this.comments = comments;
 	}
 	public String getTimesheet_for_date() {
-		return timesheet_for_date;
+		return timesheetfordate;
 	}
 	public void setTimesheet_for_date(String timesheet_for_date) {
-		this.timesheet_for_date = timesheet_for_date;
+		this.timesheetfordate = timesheet_for_date;
 	}
 	public Timesheet() {
 		super();
@@ -45,8 +45,8 @@ public class Timesheet {
 		super();
 		this.userid = userid;
 		this.taskid = taskid;
-		this.spend_time = spend_time;
+		this.spendtime = spend_time;
 		this.comments = comments;
-		this.timesheet_for_date = timesheet_for_date;
+		this.timesheetfordate = timesheet_for_date;
 	}
 }

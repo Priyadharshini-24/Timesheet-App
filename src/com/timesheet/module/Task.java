@@ -5,9 +5,9 @@ public class Task {
 	private String task;
 	private String startdate;
 	private String enddate;
-	private String task_priority;
-	private String assigned_to;
-	private String date_assigned;
+	private String taskpriority;
+	private String assignedto;
+	private String dateassigned;
 	
 	public int getUserid() {
 		return userid;
@@ -34,22 +34,22 @@ public class Task {
 		this.enddate = enddate;
 	}
 	public String getTask_priority() {
-		return task_priority;
+		return taskpriority;
 	}
 	public void setTask_priority(String task_priority) {
-		this.task_priority = task_priority;
+		this.taskpriority = task_priority;
 	}
 	public String getAssigned_to() {
-		return assigned_to;
+		return assignedto;
 	}
 	public void setAssigned_to(String assigned_to) {
-		this.assigned_to = assigned_to;
+		this.assignedto = assigned_to;
 	}
 	public String getDate_assigned() {
-		return date_assigned;
+		return dateassigned;
 	}
 	public void setDate_assigned(String date_assigned) {
-		this.date_assigned = date_assigned;
+		this.dateassigned = date_assigned;
 	}
 	public Task(int userid,String task, String startdate, String enddate, String task_priority, String assigned_to,
 			String date_assigned) {
@@ -58,9 +58,9 @@ public class Task {
 		this.task = task;
 		this.startdate = startdate;
 		this.enddate = enddate;
-		this.task_priority = task_priority;
-		this.assigned_to = assigned_to;
-		this.date_assigned = date_assigned;
+		this.taskpriority = task_priority;
+		this.assignedto = assigned_to;
+		this.dateassigned = date_assigned;
 	}
 	public Task() {
 		super();
@@ -69,8 +69,8 @@ public class Task {
 	@Override
 	public String toString() {
 		return "Task [userid=" + userid + ", task=" + task + ", startdate=" + startdate + ", enddate=" + enddate
-				+ ", task_priority=" + task_priority + ", assigned_to=" + assigned_to + ", date_assigned="
-				+ date_assigned + "]";
+				+ ", task_priority=" + taskpriority + ", assigned_to=" + assignedto + ", date_assigned="
+				+ dateassigned + "]";
 	}
 	
 

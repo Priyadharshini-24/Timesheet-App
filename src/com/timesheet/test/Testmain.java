@@ -84,8 +84,11 @@ public class Testmain {
 
 			User user = new User(firstname, lastname, username, password);
 			userdao.insertUser(user);
-		
-		case 2:
+			System.out.println("do u want to Login...(y/n)");
+			char ch=sc.next().charAt(0);
+			switch(ch)
+			{
+		   case 'y':
 			userdao=new UserDAO();
 			System.out.println("User Login");
 			do {
@@ -115,6 +118,9 @@ public class Testmain {
 				System.out.println("Welcome\t"+validuser.getFirstname());
 			}
 			break;
+		   case 'n':
+			   System.exit(0);
+			}
 		}
 	}
 

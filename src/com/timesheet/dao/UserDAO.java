@@ -55,6 +55,26 @@ public class UserDAO {
 		return user;
 		
 	}
+	public void updateUser(User user)
+	{
+		String updatequery="UPDATE USER_DETAIL SET PASSWORD=? WHERE USER_NAME=?";
+		Connection con=Connectionutil.getDbConnection();
+		PreparedStatement pstmt=null;
+		try
+		{
+			pstmt=con.prepareStatement(updatequery);
+			pstmt.setString(4, user.getPassword());
+			pstmt.executeUpdate();
+			System.out.println("value update successfully");
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			System.out.println("values not updated");
+		}
+		
+	}
+	
 
 	public List<User> showalluser()
 	{

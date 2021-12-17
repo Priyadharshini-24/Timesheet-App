@@ -1,0 +1,32 @@
+package com.timesheet.dao;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import com.timesheet.module.User;
+
+public class AdminDAO {
+	public User validateAdmin(String username,String password)
+	{
+		String checkquery="SELECT USER_NAME,PASSWORD FROM USER_DETAIL WHERE ROLE='ADMIN'";
+		Connection con=Connectionutil.getDbConnection();
+		 User user=null;
+		try {
+			Statement st=con.createStatement();
+			ResultSet rs=st.executeQuery(checkquery);
+			if(rs.next())
+			{
+				user=new User(rs.getString(2),rs.getString(3), username,password);
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			System.out.println("Statement error");
+		}
+		
+	return user;
+		
+	}
+	}
+	
