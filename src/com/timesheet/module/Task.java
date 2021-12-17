@@ -1,12 +1,20 @@
-package timesheet;
+package com.timesheet.module;
 
 public class Task {
+	private int userid;
 	private String task;
 	private String startdate;
 	private String enddate;
 	private String task_priority;
 	private String assigned_to;
 	private String date_assigned;
+	
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	public String getTask() {
 		return task;
 	}
@@ -43,9 +51,10 @@ public class Task {
 	public void setDate_assigned(String date_assigned) {
 		this.date_assigned = date_assigned;
 	}
-	public Task(String task, String startdate, String enddate, String task_priority, String assigned_to,
+	public Task(int userid,String task, String startdate, String enddate, String task_priority, String assigned_to,
 			String date_assigned) {
 		super();
+		this.userid=userid;
 		this.task = task;
 		this.startdate = startdate;
 		this.enddate = enddate;
@@ -53,10 +62,16 @@ public class Task {
 		this.assigned_to = assigned_to;
 		this.date_assigned = date_assigned;
 	}
+	public Task() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public String toString() {
-		return "Task [task=" + task + ", startdate=" + startdate + ", enddate=" + enddate + ", task_priority="
-				+ task_priority + ", assigned_to=" + assigned_to + ", date_assigned=" + date_assigned + "]";
+		return "Task [userid=" + userid + ", task=" + task + ", startdate=" + startdate + ", enddate=" + enddate
+				+ ", task_priority=" + task_priority + ", assigned_to=" + assigned_to + ", date_assigned="
+				+ date_assigned + "]";
 	}
+	
 
 }

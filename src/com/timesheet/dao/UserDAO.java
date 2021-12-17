@@ -1,4 +1,4 @@
-package timesheet;
+package com.timesheet.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import com.timesheet.module.User;
 
 public class UserDAO {
 	public void insertUser(User user)
@@ -35,7 +36,7 @@ public class UserDAO {
 	
 	public User validateUser(String username,String password)
 	{
-		String validatequery="select * from USER_DETAIL where user_name='"+username+"'and password='"+password+"'";
+		String validatequery="SELECT * FROM USER_DETAIL WHERE USER_NAME='"+username+"'AND PASSWORD='"+password+"'";
 		Connection con=Connectionutil.getDbConnection();
 		User user=null;
 		try {
@@ -80,6 +81,26 @@ public class UserDAO {
 		}
 		
 		return userlist;
+		
+	}
+	public static int findUserId(User user)
+	{
+		String findUser="SELECT USER_ID USER_DETAIL WHERE USER_NAME= '"+user.getUsername()+"'";
+		Connection con=Connectionutil.getDbConnection();
+		Statement stmt;
+		int userId=0;
+		try {
+			stmt = con.createStatement();
+			ResultSet rs=stmt.executeQuery(findUser);
+			if(rs.next())
+			{
+			userId=rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userId;
 		
 	}
 }

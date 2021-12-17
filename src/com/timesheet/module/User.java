@@ -1,4 +1,4 @@
-package timesheet;
+package com.timesheet.module;
 
 import java.util.Objects;
 

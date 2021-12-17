@@ -1,6 +1,9 @@
-package timesheet;
+package com.timesheet.test;
 
 import java.util.Scanner;
+
+import com.timesheet.dao.UserDAO;
+import com.timesheet.module.User;
 
 public class Testmain {
 

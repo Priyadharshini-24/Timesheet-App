@@ -1,4 +1,4 @@
-package timesheet;
+package com.timesheet.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
