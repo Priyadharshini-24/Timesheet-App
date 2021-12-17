@@ -11,7 +11,7 @@ import java.util.List;
 public class UserDAO {
 	public void insertUser(User user)
 	{
-		String insertquery="INSERT INTO USER_lOGIN(FIRST_NAME,LAST_NAME,USER_NAME,PASSWORD)VALUES(?,?,?,?)";
+		String insertquery="INSERT INTO USER_DETAIL(FIRST_NAME,LAST_NAME,USER_NAME,PASSWORD)VALUES(?,?,?,?)";
 		Connectionutil conutil=new Connectionutil();
 		Connection con=conutil.getDbConnection();
 		PreparedStatement pstmt=null;
@@ -35,7 +35,7 @@ public class UserDAO {
 	
 	public User validateUser(String username,String password)
 	{
-		String validatequery="select * from USER_LOGIN where user_name='"+username+"'and password='"+password+"'";
+		String validatequery="select * from USER_DETAIL where user_name='"+username+"'and password='"+password+"'";
 		Connection con=Connectionutil.getDbConnection();
 		User user=null;
 		try {
@@ -58,7 +58,7 @@ public class UserDAO {
 	public List<User> showalluser()
 	{
 		List<User> userlist=new ArrayList<User>();
-		String selectquery="select * from USER_LOGIN";
+		String selectquery="select * from USER_DETAIL";
 		Connectionutil conutil=new Connectionutil();
 		Connection con=conutil.getDbConnection();
 		PreparedStatement pstmt=null;
