@@ -7,12 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.timesheet.module.Task;
 import com.timesheet.module.User;
 
 public class UserDAO {
 	public void insertUser(User user)
 	{
-		String insertquery="INSERT INTO USER_DETAIL(FIRST_NAME,LAST_NAME,USER_NAME,PASSWORD)VALUES(?,?,?,?)";
+		String insertquery="insert into user_details(first_name,last_name,user_name,password)values(?,?,?,?)";
 		Connectionutil conutil=new Connectionutil();
 		Connection con=conutil.getDbConnection();
 		PreparedStatement pstmt=null;
@@ -30,13 +32,13 @@ public class UserDAO {
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-			System.out.println("values not inserted");
+			System.out.println("somthing went wrong");
 		}
 	}
 	
 	public User validateUser(String username,String password)
 	{
-		String validatequery="SELECT * FROM USER_DETAIL WHERE USER_NAME='"+username+"'AND PASSWORD='"+password+"'";
+		String validatequery="select * from user_details where role='TEAM MEMBER'and user_name='"+username+"'and password='"+password+"'";
 		Connection con=Connectionutil.getDbConnection();
 		User user=null;
 		try {
@@ -57,29 +59,31 @@ public class UserDAO {
 	}
 	public void updateUser(User user)
 	{
-		String updatequery="UPDATE USER_DETAIL SET PASSWORD=? WHERE USER_NAME=?";
+		String updatequery="update user_details set first_name=?,last_name=?,password=? where user_name=?";
 		Connection con=Connectionutil.getDbConnection();
 		PreparedStatement pstmt=null;
 		try
 		{
 			pstmt=con.prepareStatement(updatequery);
-			pstmt.setString(4, user.getPassword());
-			pstmt.executeUpdate();
-			System.out.println("value update successfully");
+			pstmt.setString(1, user.getFirstname());
+			pstmt.setString(2, user.getLastname());
+			pstmt.setString(3, user.getPassword());
+			pstmt.setString(4, user.getUsername());
+			int i=pstmt.executeUpdate();
+			System.out.println(i+" user profile updated");
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-			System.out.println("values not updated");
+			System.out.println("something went wrong");
 		}
-		
 	}
 	
 
 	public List<User> showalluser()
 	{
 		List<User> userlist=new ArrayList<User>();
-		String selectquery="select * from USER_DETAIL";
+		String selectquery="select * from user_details";
 		Connectionutil conutil=new Connectionutil();
 		Connection con=conutil.getDbConnection();
 		PreparedStatement pstmt=null;
@@ -90,22 +94,41 @@ public class UserDAO {
 			rs=pstmt.executeQuery();
 		while(rs.next())
 		{
-			User user=new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+			User user=new User(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
 			userlist.add(user);
 		}
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-			System.out.println("values not selected");
+			System.out.println("somthing went wrong");
 		}
 		
 		return userlist;
 		
 	}
+	public void removeUser(String username)
+	{
+		String removequery="delete user_details where user_name=?";
+		Connection con=Connectionutil.getDbConnection();
+		PreparedStatement pstmt=null;
+		try
+		{
+			pstmt=con.prepareStatement(removequery);
+			pstmt.setString(1,username);
+			int i=pstmt.executeUpdate();
+			System.out.println(i+" User details Remove ");
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			System.out.println("something went wrong");
+		}
+	}
 	public static int findUserId(User user)
 	{
-		String findUser="SELECT USER_ID USER_DETAIL WHERE USER_NAME= '"+user.getUsername()+"'";
+		String findUser="select user_id user_details where user_name= '"+user.getUsername()+"'";
 		Connection con=Connectionutil.getDbConnection();
 		Statement stmt;
 		int userId=0;

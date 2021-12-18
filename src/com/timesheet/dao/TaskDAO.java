@@ -10,7 +10,7 @@ import com.timesheet.module.Task;
 public class TaskDAO {
 	public void insertTask(Task task)
 	{
-		String insertquery="INSERT INTO TASK_DETAIL(TASK_NAME,START_DATE,END_DATE,TASK_PRIORITY,ASSIGNED_TO,ASSIGNED_DATE)VALUES(?,?,?,?,?,?)";
+		String insertquery="insert into task_details(task_name,start_date,end_date,task_priority,assigned_to,assigned_date)values(?,?,?,?,?,?)";
 		Connectionutil conutil=new Connectionutil();
 		Connection con=conutil.getDbConnection();
 		PreparedStatement pstmt=null;

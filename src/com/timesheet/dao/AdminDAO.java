@@ -8,7 +8,7 @@ import com.timesheet.module.User;
 public class AdminDAO {
 	public User validateAdmin(String username,String password)
 	{
-		String checkquery="SELECT USER_NAME,PASSWORD FROM USER_DETAIL WHERE ROLE='ADMIN'";
+		String checkquery="select * from user_details where role='ADMIN'and user_name='"+username+"'and password='"+password+"'";
 		Connection con=Connectionutil.getDbConnection();
 		 User user=null;
 		try {
