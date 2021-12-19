@@ -3,9 +3,13 @@ package com.timesheet.test;
 import java.util.List;
 import java.util.Scanner;
 import com.timesheet.dao.AdminDAO;
+import com.timesheet.dao.StatusDAO;
 import com.timesheet.dao.TaskDAO;
+import com.timesheet.dao.TimesheetDAO;
 import com.timesheet.dao.UserDAO;
+import com.timesheet.module.Status;
 import com.timesheet.module.Task;
+import com.timesheet.module.Timesheet;
 import com.timesheet.module.User;
 
 public class Testmain {
@@ -18,6 +22,8 @@ public class Testmain {
 		UserDAO userdao = null;
 		AdminDAO admindao = null;
 		TaskDAO taskdao =null;
+		TimesheetDAO timesheetdao=null;
+		StatusDAO statusdao=null;
 		switch (choice) {
 		case 1:
 			String firstname = null;
@@ -128,7 +134,7 @@ public class Testmain {
 				if (validUser == null) {
 					User adminuser = admindao.validateAdmin(username, password);
 					System.out.println("Welcome\t" + adminuser.getFirstname() + " as Admin");
-					System.out.println("1.view user\n2.Remove user\n3.Find UserId\n4.Add Task\n5.Edit Task\n6.View Task\n7.Remove task");
+					System.out.println("1.view user\n2.Remove user\n3.Find UserId\n4.Add Task\n5.Edit Task\n6.View Task\n7.Remove task\n8.View Timesheet\n9.Find TimesheetId\n10.Enter Status\n11.update status\n12.view status");
 					int urchoice = Integer.parseInt(sc.nextLine());
 					switch (urchoice) {
 					case 1:
@@ -206,13 +212,46 @@ public class Testmain {
 						task=sc.nextLine();
 						taskdao.removeTask(task);
 						break;
+					case 8:
+						timesheetdao=new TimesheetDAO();
+						List<Timesheet> showTimesheet=timesheetdao.showTimesheet();
+						for(int i=0;i<showTimesheet.size();i++)
+						{
+							System.out.println(showTimesheet.get(i));
+						}
+						break;
+					case 9:
+						String timesheetfordate=null;
+						timesheetdao=new TimesheetDAO();
+						System.out.println("Enter Timesheet for Date : ");
+						timesheetfordate=sc.nextLine();
+					    id=TimesheetDAO.findTimesheetId(timesheetfordate);
+						System.out.println("Timesheet Id : "+id);
+						break;
+					case 10:
+						userid=0;
+						int timesheetid=0;
+						String status=null;
+						String approvedby=null;
+						statusdao=new StatusDAO();
+						System.out.println("Enter User Id :");
+						userid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Timesheet Id : ");
+						timesheetid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter status : ");
+						status=sc.nextLine();
+						System.out.println("Enter Approved by:");
+						approvedby=sc.nextLine();
+						Status statusobj=new Status(userid,timesheetid,status,approvedby);
+						statusdao.insertStatus(statusobj);
+						break;
 					}
 				}
 
 				else {
 					System.out.println("Welcome\t" + validUser.getFirstname());
 
-					System.out.println(" 1.Edit Profile\n 2.View Task\n3.Find Task Id\nEnter ur choice");
+					System.out.println(" 1.Edit Profile\n 2.View Task\n3.Find Task Id\n4.Enter Timesheet\n5.Edit Timesheet\n6.Remove Timesheet\n7.View Timesheet\nEnter ur choice");
 					int urchoice = Integer.parseInt(sc.nextLine());
 					switch (urchoice) {
 					case 1:
@@ -295,6 +334,54 @@ public class Testmain {
 						task=sc.nextLine();
 						int id=TaskDAO.findtaskId(task);
 						System.out.println("Task Id : "+id);
+						break;
+					case 4:
+						int userid=0;
+						int taskid=0;
+						int spendtime=0;
+						String comments=null,timesheetfordate=null;
+						timesheetdao=new TimesheetDAO();
+						System.out.println("Enter User Id :");
+						userid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Task Id :");
+						taskid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Spending time in hrs :");
+						spendtime=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Comments:");
+						comments=sc.nextLine();
+						System.out.println("Enter timesheet for Date :");
+						timesheetfordate=sc.nextLine();
+						Timesheet timesheet=new Timesheet(userid,taskid,spendtime,comments,timesheetfordate);
+						timesheetdao.insertTimesheet(timesheet);
+						break;
+					case 5:
+						timesheetdao=new TimesheetDAO();
+						System.out.println("Enter User Id to update:");
+						userid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Task Id to update :");
+						taskid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Spending time in hrs to update :");
+						spendtime=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Comments to update:");
+						comments=sc.nextLine();
+						System.out.println("Enter timesheet Date where to update :");
+						timesheetfordate=sc.nextLine();
+						 timesheet=new Timesheet(userid,taskid,spendtime,comments,timesheetfordate);
+						 timesheetdao.updateTimesheet(timesheet);
+						 break;
+					case 6:
+						timesheetdao = new TimesheetDAO();
+						System.out.println("Enter Timesheet date to remove : ");
+						timesheetfordate=sc.nextLine();
+						timesheetdao.removeTimesheet(timesheetfordate);
+						break;
+					case 7:
+						timesheetdao=new TimesheetDAO();
+						List<Timesheet> showTimesheet=timesheetdao.showTimesheet();
+						for(int i=0;i<showTimesheet.size();i++)
+						{
+							System.out.println(showTimesheet.get(i));
+						}
 						break;
 					}
 				}

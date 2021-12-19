@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.timesheet.module.Task;
 import com.timesheet.module.User;
 
 public class UserDAO {
