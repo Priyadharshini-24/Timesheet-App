@@ -3,7 +3,9 @@ package com.timesheet.test;
 import java.util.List;
 import java.util.Scanner;
 import com.timesheet.dao.AdminDAO;
+import com.timesheet.dao.TaskDAO;
 import com.timesheet.dao.UserDAO;
+import com.timesheet.module.Task;
 import com.timesheet.module.User;
 
 public class Testmain {
@@ -15,6 +17,7 @@ public class Testmain {
 		int choice = Integer.parseInt(sc.nextLine());
 		UserDAO userdao = null;
 		AdminDAO admindao = null;
+		TaskDAO taskdao =null;
 		switch (choice) {
 		case 1:
 			String firstname = null;
@@ -121,10 +124,11 @@ public class Testmain {
 					}
 				} while (flag == 1);
 				User validUser = userdao.validateUser(username, password);
+				//admin
 				if (validUser == null) {
 					User adminuser = admindao.validateAdmin(username, password);
 					System.out.println("Welcome\t" + adminuser.getFirstname() + " as Admin");
-					System.out.println("1.view user");
+					System.out.println("1.view user\n2.Remove user\n3.Find UserId\n4.Add Task\n5.Edit Task\n6.View Task\n7.Remove task");
 					int urchoice = Integer.parseInt(sc.nextLine());
 					switch (urchoice) {
 					case 1:
@@ -134,18 +138,81 @@ public class Testmain {
 						{
 							System.out.println(showUser.get(i));
 						}
+						break;
 					case 2:
 						userdao = new UserDAO();
 						System.out.println("Enter User name to remove : ");
 						username=sc.nextLine();
-						userdao.removeUser(username);	
+						userdao.removeUser(username);
+						break;
+					case 3:
+						userdao=new UserDAO();
+						System.out.println("Enter User name: ");
+						username=sc.nextLine();
+						int id=UserDAO.findUserId(username);
+						System.out.println("User Id : "+id);
+						break;
+					case 4:
+						int userid=0;
+						String task=null;
+						String dateassigned=null;;
+						String enddate=null;
+						String taskpriority=null;
+						String assignedto=null;
+						taskdao=new TaskDAO();
+						System.out.println("Enter User Id:");
+						userid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Task Name:");
+						task=sc.nextLine();
+						System.out.println("Enter Date to Assign Task : ");
+						dateassigned=sc.nextLine();
+						System.out.println("Enter End Date : ");
+						enddate=sc.nextLine();
+						System.out.println("Enter Task Priority : ");
+						taskpriority=sc.nextLine();
+						System.out.println("Enter User Name to task Assign : ");
+						assignedto=sc.nextLine();
+						Task taskobj=new Task(userid,task,dateassigned,enddate,taskpriority,assignedto);
+						taskdao.insertTask(taskobj);
+						break;
+					case 5:
+						taskdao=new TaskDAO();
+						System.out.println("Enter Date to update Task : ");
+						dateassigned=sc.nextLine();
+						System.out.println("Enter User Id u want to update:");
+						userid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Task Name u want to update:");
+						task=sc.nextLine();
+						System.out.println("Enter End Date u want to update : ");
+						enddate=sc.nextLine();
+						System.out.println("Enter Task Priority u want to update : ");
+						taskpriority=sc.nextLine();
+						System.out.println("Enter User Name to task Assign u want to update : ");
+						assignedto=sc.nextLine();
+					  taskobj=new Task(userid,task,dateassigned,enddate,taskpriority,assignedto);
+					  taskdao.updateTask(taskobj);
+					  break;
+					case 6:
+						taskdao = new TaskDAO();
+						List<Task> showTask = taskdao.showallTask();
+						for (int i = 0; i < showTask.size(); i++) 
+						{
+							System.out.println(showTask.get(i));
+						}
+						break;
+					case 7:
+						taskdao = new TaskDAO();
+						System.out.println("Enter Task name to remove : ");
+						task=sc.nextLine();
+						taskdao.removeTask(task);
+						break;
 					}
 				}
 
 				else {
 					System.out.println("Welcome\t" + validUser.getFirstname());
 
-					System.out.println(" 1.Edit Profile\n 2.\nEnter ur choice");
+					System.out.println(" 1.Edit Profile\n 2.View Task\n3.Find Task Id\nEnter ur choice");
 					int urchoice = Integer.parseInt(sc.nextLine());
 					switch (urchoice) {
 					case 1:
@@ -212,6 +279,23 @@ public class Testmain {
 
 						user = new User(firstname, lastname, username, password);
 						userdao.updateUser(user);
+						break;
+					case 2:
+						taskdao = new TaskDAO();
+						List<Task> showTask = taskdao.showallTask();
+						for (int i = 0; i < showTask.size(); i++) 
+						{
+							System.out.println(showTask.get(i));
+						}
+						break;
+					case 3:
+						String task=null;
+						taskdao=new TaskDAO();
+						System.out.println("Enter Task name: ");
+						task=sc.nextLine();
+						int id=TaskDAO.findtaskId(task);
+						System.out.println("Task Id : "+id);
+						break;
 					}
 				}
 			case 'n':

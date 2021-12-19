@@ -51,7 +51,7 @@ public String toString() {
 }
 @Override
 public int hashCode() {
-	return Objects.hash(password, username);
+	return Objects.hash(firstname, lastname, password, username);
 }
 @Override
 public boolean equals(Object obj) {
@@ -62,6 +62,8 @@ public boolean equals(Object obj) {
 	if (getClass() != obj.getClass())
 		return false;
 	User other = (User) obj;
-	return Objects.equals(password, other.password) && Objects.equals(username, other.username);
+	return Objects.equals(firstname, other.firstname) && Objects.equals(lastname, other.lastname)
+			&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 }
+
 }

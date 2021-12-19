@@ -83,7 +83,7 @@ public class UserDAO {
 	public List<User> showalluser()
 	{
 		List<User> userlist=new ArrayList<User>();
-		String selectquery="select * from user_details";
+		String selectquery="select * from user_details where role='TEAM MEMBER'";
 		Connectionutil conutil=new Connectionutil();
 		Connection con=conutil.getDbConnection();
 		PreparedStatement pstmt=null;
@@ -109,7 +109,7 @@ public class UserDAO {
 	}
 	public void removeUser(String username)
 	{
-		String removequery="delete user_details where user_name=?";
+		String removequery="delete from user_details where user_name=?";
 		Connection con=Connectionutil.getDbConnection();
 		PreparedStatement pstmt=null;
 		try
@@ -126,9 +126,9 @@ public class UserDAO {
 			System.out.println("something went wrong");
 		}
 	}
-	public static int findUserId(User user)
+	public static int findUserId(String username)
 	{
-		String findUser="select user_id user_details where user_name= '"+user.getUsername()+"'";
+		String findUser="select user_id from user_details where user_name= '"+username+"'";
 		Connection con=Connectionutil.getDbConnection();
 		Statement stmt;
 		int userId=0;

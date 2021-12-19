@@ -1,77 +1,96 @@
 package com.timesheet.module;
-
+import java.util.Objects;
 public class Task {
 	private int userid;
 	private String task;
-	private String startdate;
+	private String dateassigned;
 	private String enddate;
 	private String taskpriority;
 	private String assignedto;
-	private String dateassigned;
 	
+    
 	public int getUserid() {
 		return userid;
 	}
+
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
+
 	public String getTask() {
 		return task;
 	}
+
 	public void setTask(String task) {
 		this.task = task;
 	}
-	public String getStartdate() {
-		return startdate;
+
+	public String getDateassigned() {
+		return dateassigned;
 	}
-	public void setStartdate(String startdate) {
-		this.startdate = startdate;
+
+	public void setDateassigned(String dateassigned) {
+		this.dateassigned = dateassigned;
 	}
 	public String getEnddate() {
 		return enddate;
 	}
+
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
-	public String getTask_priority() {
+
+	public String getTaskpriority() {
 		return taskpriority;
 	}
-	public void setTask_priority(String task_priority) {
-		this.taskpriority = task_priority;
+
+	public void setTaskpriority(String taskpriority) {
+		this.taskpriority = taskpriority;
 	}
-	public String getAssigned_to() {
+
+	public String getAssignedto() {
 		return assignedto;
 	}
-	public void setAssigned_to(String assigned_to) {
-		this.assignedto = assigned_to;
-	}
-	public String getDate_assigned() {
-		return dateassigned;
-	}
-	public void setDate_assigned(String date_assigned) {
-		this.dateassigned = date_assigned;
-	}
-	public Task(int userid,String task, String startdate, String enddate, String task_priority, String assigned_to,
-			String date_assigned) {
-		super();
-		this.userid=userid;
-		this.task = task;
-		this.startdate = startdate;
-		this.enddate = enddate;
-		this.taskpriority = task_priority;
-		this.assignedto = assigned_to;
-		this.dateassigned = date_assigned;
+
+	public void setAssignedto(String assignedto) {
+		this.assignedto = assignedto;
 	}
 	public Task() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Task(int userid, String task, String dateassigned, String enddate, String taskpriority, String assignedto) {
+		super();
+		this.userid = userid;
+		this.task = task;
+		this.dateassigned = dateassigned;
+		this.enddate = enddate;
+		this.taskpriority = taskpriority;
+		this.assignedto = assignedto;
+		
 	}
 	@Override
 	public String toString() {
-		return "Task [userid=" + userid + ", task=" + task + ", startdate=" + startdate + ", enddate=" + enddate
-				+ ", task_priority=" + taskpriority + ", assigned_to=" + assignedto + ", date_assigned="
-				+ dateassigned + "]";
+		return "UserId : " + userid + "\n Task Name : " + task +"\n Date assigned : " +dateassigned + "\n End date : " +enddate
+				+ "\n Task Priority : " + taskpriority + "\n Assigned to : " + assignedto;
+		}
+	@Override
+	public int hashCode() {
+		return Objects.hash(assignedto,  enddate, dateassigned, task, taskpriority, userid);
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		return Objects.equals(assignedto, other.assignedto) && Objects.equals(enddate, other.enddate)
+				&& Objects.equals(dateassigned, other.dateassigned)
+				&& Objects.equals(task, other.task) && Objects.equals(taskpriority, other.taskpriority)
+				&& userid == other.userid;
+	}	
 	
-
-}
+	}
