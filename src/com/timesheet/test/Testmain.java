@@ -134,7 +134,7 @@ public class Testmain {
 				if (validUser == null) {
 					User adminuser = admindao.validateAdmin(username, password);
 					System.out.println("Welcome\t" + adminuser.getFirstname() + " as Admin");
-					System.out.println("1.view user\n2.Remove user\n3.Find UserId\n4.Add Task\n5.Edit Task\n6.View Task\n7.Remove task\n8.View Timesheet\n9.Find TimesheetId\n10.Enter Status\n11.update status\n12.view status");
+					System.out.println("1.view user\n2.Remove user\n3.Find UserId\n4.Add Task\n5.Edit Task\n6.View Task\n7.Remove task\n8.View Timesheet\n9.Find TimesheetId\n10.Enter Status\n11.update status\n12.view status\n13.Remove Status");
 					int urchoice = Integer.parseInt(sc.nextLine());
 					switch (urchoice) {
 					case 1:
@@ -245,13 +245,39 @@ public class Testmain {
 						Status statusobj=new Status(userid,timesheetid,status,approvedby);
 						statusdao.insertStatus(statusobj);
 						break;
+					case 11:
+						statusdao=new StatusDAO();
+						System.out.println("Enter User Id u want to update :");
+						userid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter Timesheet Id where to update : ");
+						timesheetid=Integer.parseInt(sc.nextLine());
+						System.out.println("Enter status u want to update : ");
+						status=sc.nextLine();
+						System.out.println("Enter ur name u want to update:");
+						approvedby=sc.nextLine();
+						statusobj=new Status(userid,timesheetid,status,approvedby);
+						statusdao.updateStatus(statusobj);
+					case 12:
+						statusdao =new StatusDAO();
+						List<Status> showStatus=statusdao.showStatus();
+						for(int i=0;i<showStatus.size();i++)
+						{
+							System.out.println(showStatus.get(i));
+						}
+						break;
+					case 13:
+						statusdao = new StatusDAO();
+						System.out.println("Enter Timesheet Id to remove : ");
+						timesheetid=Integer.parseInt(sc.nextLine());
+						statusdao.removeStatus(timesheetid);
+						break;
 					}
 				}
 
 				else {
 					System.out.println("Welcome\t" + validUser.getFirstname());
 
-					System.out.println(" 1.Edit Profile\n 2.View Task\n3.Find Task Id\n4.Enter Timesheet\n5.Edit Timesheet\n6.Remove Timesheet\n7.View Timesheet\nEnter ur choice");
+					System.out.println(" 1.Edit Profile\n 2.View Task\n3.Find Task Id\n4.Enter Timesheet\n5.Edit Timesheet\n6.Remove Timesheet\n7.View Timesheet\n8.View Status\\nEnter ur choice");
 					int urchoice = Integer.parseInt(sc.nextLine());
 					switch (urchoice) {
 					case 1:
@@ -381,6 +407,14 @@ public class Testmain {
 						for(int i=0;i<showTimesheet.size();i++)
 						{
 							System.out.println(showTimesheet.get(i));
+						}
+						break;
+					case 8:
+						statusdao =new StatusDAO();
+						List<Status> showStatus=statusdao.showStatus();
+						for(int i=0;i<showStatus.size();i++)
+						{
+							System.out.println(showStatus.get(i));
 						}
 						break;
 					}
