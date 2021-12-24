@@ -83,6 +83,7 @@ public class Testmain {
 
 			do {
 				System.out.println("Enter Password:");
+				System.out.println("Sample password pattern: Aabs123@#");
 				password = sc.nextLine();
 				if (password.matches("[A-Z]+[a-z]+[0-9]+[@#.]+{8,10}")) {
 					flag = 0;
@@ -488,6 +489,7 @@ public class Testmain {
 						timesheetdao=new TimesheetDAO();
 						System.out.println("Enter User Name:");
 						username=sc.nextLine();
+						
 						id=UserDAO.findUserId(username);
 						System.out.println("Enter Task name: ");
 						task=sc.nextLine();
