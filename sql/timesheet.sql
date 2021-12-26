@@ -73,6 +73,11 @@ select * from status where status='rejected';
 
 select * from status inner join timesheets on status.timesheet_id=timesheets.timesheet_id where status='rejected';
 
+select td.task_name,s.timesheet_id,ts.timesheet_for_date,ts.spend_time_hrs,ts.comments,s.status,s.approved_by from status s 
+inner join timesheets ts on s.timesheet_id=ts.timesheet_id 
+inner join task_details td on td.task_id=ts.task_id 
+where status='rejected' and td.assigned_to='keerthanaguru@gmail.com';
+
 select t.timesheet_id,t.task_id,t.timesheet_for_date,t.spend_time_hrs,t.comments,s.status
 from status s inner join timesheets t
 on s.timesheet_id=t.timesheet_id where status='rejected';

@@ -9,10 +9,10 @@ import java.util.List;
 
 import com.timesheet.module.Rejecttimesheet;
 public class RejecttimesheetDAO {
-	public List<Rejecttimesheet> showRejecttimesheet()
+	public List<Rejecttimesheet> showRejecttimesheet(String username)
 	 {
 		List<Rejecttimesheet> statuslist =new ArrayList<Rejecttimesheet>();
-		String selectquery="select t.timesheet_id,t.task_id,t.timesheet_for_date,t.spend_time_hrs,s.status from (status s inner join timesheets t on s.timesheet_id=t.timesheet_id) where status='rejected'";
+		String selectquery="select td.task_name,s.timesheet_id,ts.timesheet_for_date,ts.spend_time_hrs,ts.comments,s.status,s.approved_by from (status s inner join timesheets ts on s.timesheet_id=ts.timesheet_id inner join task_details td on td.task_id=ts.task_id) where status='rejected' and td.assigned_to='"+username+"'";
 		Connectionutil conutil=new Connectionutil();
 		Connection con=conutil.getDbConnection();
 		PreparedStatement pstmt=null;
@@ -23,7 +23,7 @@ public class RejecttimesheetDAO {
 			rs=pstmt.executeQuery();
 		while(rs.next())
 		{
-			Rejecttimesheet rejectTimesheet=new Rejecttimesheet(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getInt(4),rs.getString(5));
+			Rejecttimesheet rejectTimesheet=new Rejecttimesheet(rs.getString(1),rs.getInt(2),rs.getDate(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7));
 			statuslist.add(rejectTimesheet);
 		}
 		}

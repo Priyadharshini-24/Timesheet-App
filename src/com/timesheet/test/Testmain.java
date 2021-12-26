@@ -481,15 +481,12 @@ public class Testmain {
 						break;
 					case 9:
 						rejectdao=new RejecttimesheetDAO();
-						List<Rejecttimesheet> showReject=rejectdao.showRejecttimesheet();
+						List<Rejecttimesheet> showReject=rejectdao.showRejecttimesheet(username);
 						for(int i=0;i<showReject.size();i++)
 						{
 							System.out.println(showReject.get(i));
 						}
-						timesheetdao=new TimesheetDAO();
-						System.out.println("Enter User Name:");
-						username=sc.nextLine();
-						
+						timesheetdao=new TimesheetDAO();	
 						id=UserDAO.findUserId(username);
 						System.out.println("Enter Task name: ");
 						task=sc.nextLine();
@@ -511,8 +508,6 @@ public class Testmain {
 							Date timesheetdate1 = parser.parse(dateStr);
 							DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 							String timesheetdate=(formatter.format(timesheetdate1));
-						System.out.println("Enter User Name : ");
-					    username=sc.nextLine();
 					    List<Report> showReport=reportdao.findreport(timesheetdate, username);
 						for(int i=0;i<showReport.size();i++)
 						{
