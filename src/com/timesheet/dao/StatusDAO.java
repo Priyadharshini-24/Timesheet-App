@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.timesheet.interfaces.StatusDAOInterface;
 import com.timesheet.module.Status;
-public class StatusDAO {
+public class StatusDAO implements StatusDAOInterface
+{
 	 public void insertStatus(Status status)
 	 {
 		 String insertquery="insert into status(user_id,timesheet_id,status,approved_by)values(?,?,?,?)";

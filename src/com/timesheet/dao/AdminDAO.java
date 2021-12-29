@@ -3,9 +3,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import com.timesheet.interfaces.AdminDAOInterface;
 import com.timesheet.module.User;
 
-public class AdminDAO {
+public class AdminDAO implements AdminDAOInterface
+{
 	public User validateAdmin(String username,String password)
 	{
 		String checkquery="select * from user_details where role='ADMIN'and user_name='"+username+"'and password='"+password+"'";

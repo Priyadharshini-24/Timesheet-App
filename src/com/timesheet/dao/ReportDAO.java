@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.timesheet.interfaces.ReportDAOInterface;
 import com.timesheet.module.Report;
 
-public class ReportDAO {
+public class ReportDAO implements ReportDAOInterface {
 	
 	public List<Report> findreport(String timesheetdate,String username)
 	{

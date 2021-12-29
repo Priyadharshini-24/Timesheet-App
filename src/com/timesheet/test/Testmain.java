@@ -174,7 +174,7 @@ public class Testmain {
 						userdao=new UserDAO();
 						System.out.println("Enter User name: ");
 						username=sc.nextLine();
-						int id=UserDAO.findUserId(username);
+						int id=userdao.findUserId(username);
 						System.out.println("User Id : "+id);
 						break;
 					case 4:
@@ -192,7 +192,7 @@ public class Testmain {
 						taskdao=new TaskDAO();
 						System.out.println("Enter User Name:");
 						username=sc.nextLine();
-						int id1=UserDAO.findUserId(username);
+						int id1=userdao.findUserId(username);
 						System.out.println("Enter Task Name:");
 						task=sc.nextLine();
 						System.out.println("Enter Date to Assign Task : ");
@@ -215,7 +215,7 @@ public class Testmain {
 						taskdao=new TaskDAO();
 						System.out.println("Enter User Name:");
 						username=sc.nextLine();
-						id=UserDAO.findUserId(username);
+						id=userdao.findUserId(username);
 						System.out.println("Enter Date to update Task : ");
 						dateassigned=sc.nextLine();
 						System.out.println("Enter Task Name u want to update:");
@@ -277,12 +277,12 @@ public class Testmain {
 						statusdao=new StatusDAO();
 						System.out.println("Enter User Name:");
 						username=sc.nextLine();
-						id=UserDAO.findUserId(username);
+						id=userdao.findUserId(username);
 						System.out.println("view Timesheet");
 						
 						System.out.println("Enter Date of Timesheet : ");
 						String timedate=sc.nextLine();
-						id1=TimesheetDAO.findTimesheetId(timedate);
+						id1=timesheetdao.findTimesheetId(timedate);
 						System.out.println("Enter status : ");
 						status=sc.nextLine();
 						approvedby=adminuser.getFirstname();
@@ -293,7 +293,7 @@ public class Testmain {
 						statusdao=new StatusDAO();
 						System.out.println("Enter User Name:");
 						username=sc.nextLine();
-						id=UserDAO.findUserId(username);
+						id=userdao.findUserId(username);
                         System.out.println("view status");
                         statusdao =new StatusDAO();
 						List<Status> showStatuses=statusdao.showStatus();
@@ -303,7 +303,7 @@ public class Testmain {
 						}
 						System.out.println("Enter Date of Timesheet : ");
 					     timedate=sc.nextLine();
-						id1=TimesheetDAO.findTimesheetId(timedate);
+						id1=timesheetdao.findTimesheetId(timedate);
 						System.out.println("Enter status u want to update : ");
 						status=sc.nextLine();
 						approvedby=adminuser.getFirstname();
@@ -404,7 +404,7 @@ public class Testmain {
 						taskdao=new TaskDAO();
 						System.out.println("Enter Task name: ");
 						task=sc.nextLine();
-						int id=TaskDAO.findtaskId(task);
+						int id=taskdao.findtaskId(task);
 						System.out.println("Task Id : "+id);
 						break;
 					case 4:
@@ -416,13 +416,13 @@ public class Testmain {
 						}
 						System.out.println("Enter User Name:");
 						username=sc.nextLine();
-						id=UserDAO.findUserId(username);
+						id=userdao.findUserId(username);
 						int spendtime=0;
 						String comments=null,timesheetfordate=null;
 						timesheetdao=new TimesheetDAO();
 						System.out.println("Enter Task name: ");
 						task=sc.nextLine();
-						int id1=TaskDAO.findtaskId(task);
+						int id1=taskdao.findtaskId(task);
 						System.out.println("Enter Spending time in hrs :");
 						spendtime=Integer.parseInt(sc.nextLine());
 						System.out.println("Enter Comments:");
@@ -443,10 +443,10 @@ public class Testmain {
 						timesheetdao=new TimesheetDAO();
 						System.out.println("Enter User Name:");
 						username=sc.nextLine();
-						id=UserDAO.findUserId(username);
+						id=userdao.findUserId(username);
 						System.out.println("Enter Task name: ");
 						task=sc.nextLine();
-						id1=TaskDAO.findtaskId(task);
+						id1=taskdao.findtaskId(task);
 						System.out.println("Enter Spending time in hrs to update :");
 						spendtime=Integer.parseInt(sc.nextLine());
 						System.out.println("Enter Comments to update:");
@@ -487,10 +487,10 @@ public class Testmain {
 							System.out.println(showReject.get(i));
 						}
 						timesheetdao=new TimesheetDAO();	
-						id=UserDAO.findUserId(username);
+						id=userdao.findUserId(username);
 						System.out.println("Enter Task name: ");
 						task=sc.nextLine();
-						id1=TaskDAO.findtaskId(task);
+						id1=taskdao.findtaskId(task);
 						System.out.println("Enter Spending time in hrs to update :");
 						spendtime=Integer.parseInt(sc.nextLine());
 						System.out.println("Enter Comments to update:");

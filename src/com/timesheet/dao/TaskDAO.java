@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.timesheet.interfaces.TaskDAOInterface;
 import com.timesheet.module.Task;
-public class TaskDAO {
+public class TaskDAO implements TaskDAOInterface
+{
 	public void insertTask(Task task)
 	{
 		String insertquery="insert into task_details(user_id,task_name,assigned_to_date,end_date,task_priority,assigned_to)values(?,?,?,?,?,?)";
@@ -86,7 +88,7 @@ public class TaskDAO {
 		return tasklist;
 		
 	}
-	public static int findtaskId(String task)
+	public  int findtaskId(String task)
 	{
 		String findtask="select task_id from task_details where task_name= '"+task+"'";
 		Connection con=Connectionutil.getDbConnection();

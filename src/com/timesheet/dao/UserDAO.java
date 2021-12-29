@@ -7,9 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.timesheet.interfaces.UserDAOInterface;
 import com.timesheet.module.User;
 
-public class UserDAO {
+public class UserDAO implements UserDAOInterface 
+{
 	public void insertUser(User user)
 	{
 		String insertquery="insert into user_details(first_name,last_name,user_name,password)values(?,?,?,?)";
@@ -124,7 +127,7 @@ public class UserDAO {
 			System.out.println("something went wrong");
 		}
 	}
-	public static int findUserId(String username)
+	public int findUserId(String username)
 	{
 		String findUser="select user_id from user_details where user_name= '"+username+"'";
 		Connection con=Connectionutil.getDbConnection();

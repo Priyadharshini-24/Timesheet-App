@@ -8,9 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.timesheet.interfaces.TimesheetDAOInterface;
 import com.timesheet.module.Timesheet;
 
-public class TimesheetDAO {
+public class TimesheetDAO implements TimesheetDAOInterface 
+{
 	public void insertTimesheet(Timesheet timesheet)
 	{
 		String insertquery="insert into timesheets(user_id,task_id,spend_time_hrs,comments,timesheet_for_date)values(?,?,?,?,?)";
@@ -103,7 +105,7 @@ public class TimesheetDAO {
 			System.out.println("something went wrong");
 		}
 		}
-	public static int findTimesheetId(String timesheetfordate)
+	public  int findTimesheetId(String timesheetfordate)
 	{
 		String findUser="select timesheet_id from timesheets where timesheet_for_date='"+timesheetfordate+"'";
 		Connection con=Connectionutil.getDbConnection();

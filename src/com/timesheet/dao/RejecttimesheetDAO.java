@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.timesheet.interfaces.RejecttimesheetDAOInterface;
 import com.timesheet.module.Rejecttimesheet;
-public class RejecttimesheetDAO {
+public class RejecttimesheetDAO implements RejecttimesheetDAOInterface 
+{
 	public List<Rejecttimesheet> showRejecttimesheet(String username)
 	 {
 		List<Rejecttimesheet> statuslist =new ArrayList<Rejecttimesheet>();
